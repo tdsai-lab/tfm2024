@@ -1,0 +1,598 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2022-10-20 23:33:00 -0400">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="https://bioinfoaps.github.io/">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    <link rel="license" href="#license-info" />
+
+    
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../assets/favicons/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/favicons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/favicons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/favicons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../assets/favicons/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../assets/favicons/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../assets/favicons/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../assets/favicons/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="../assets/favicons/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="../assets/favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="../assets/favicons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../assets/favicons/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../assets/favicons/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="Basic	bioinformatics and command-line	tools	for phytopathologists"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="../assets/favicons/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="../assets/favicons/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="../assets/favicons/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="../assets/favicons/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="../assets/favicons/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+  <title>
+  ML trees with bootstraps &ndash; Basic	bioinformatics and command-line	tools	for phytopathologists
+  </title>  
+
+  </head>
+  <body>
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      <a href="" class="pull-left">
+        <img class="navbar-logo" src="../assets/logo/icon.svg" alt="Data Carpentry logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	      
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lessons <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="../01-unix/index.html">UNIX command line</a></li>
+            
+            
+            <li><a href="../02-slurm/index.html">SLURM workload manager</a></li>
+            
+            
+            <li><a href="../03-blast/index.html">BLAST search</a></li>
+            
+            
+            <li><a href="../04-parse/index.html">Parsing BLAST output</a></li>
+            
+            
+            <li><a href="../05-tree/index.html">Phylogenetic tree</a></li>
+            
+          </ul>
+        </li>
+
+        
+
+      
+
+      <li class="dropdown">
+        <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Optional <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+            <li><a href="../10-more_unix/index.html">More UNIX commands</a></li>
+          
+            <li><a href="../20-text_process/index.html">FASTA manipulation with awk</a></li>
+          
+            <li><a href="../30-extra_tools/index.html">Another bioinformatic tool: PyANI</a></li>
+          
+            <li><a href="../40-awesome_bioinfo/index.html">Awesome bioinformatics</a></li>
+          
+            <li><a href="../50-multiple_gene_copies/index.html">Multiple gene copies</a></li>
+          
+            <li><a href="../60-bootstrapped_trees/index.html">ML trees with bootstraps</a></li>
+          
+        </ul>
+      </li>
+
+      
+
+      <li class="dropdown">
+      <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+            <li><a href="../about/">About</a></li>
+          
+            <li><a href="../acknowledgments/">Acknowledgements</a></li>
+          
+            <li><a href="../faq/index.html">FAQ</a></li>
+          
+            <li><a href="../intro_slides/index.html">Intro Slides</a></li>
+          
+        </ul>
+      </li>
+
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" title="Google search" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../50-multiple_gene_copies/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Basic	bioinformatics and command-line	tools	for phytopathologists</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">ML trees with bootstraps</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Creating maximum likelihood trees with RAxML</p>
+</li>
+	
+	<li><p>Creating bootstrapped trees with RAxML</p>
+</li>
+	
+	<li><p>Creating bipartition tree (ML + bootstrap)</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>We showed how to generate a simple tree in the lesson “Phylogenetic tree”.
+However, for publication, you are expected to show more evidence, 
+such as the stability of tree topology.
+One way to show this is using bootstrap values, 
+which is the probability that a particular node
+(i.e. a dichotomous branching with a particular set of samples in each branch)
+appears among a large number of trees generated 
+while resampling within the sequence alignment.
+Bootstrap values are often used in the same fashion as confidence intervals.</p>
+
+<p>A common method for creating bootstrapped trees using RAxML consists of 
+a 3 step approach:</p>
+<ul>
+  <li>Generate a few maximum likelihood (ML) trees.</li>
+  <li>Generate many bootstrapped trees.</li>
+  <li>Apply the bootstrap information to the best ML tree.</li>
+</ul>
+
+<h3 id="generating-an-ml-tree">Generating an ML tree</h3>
+
+<p>Maximum likelihood tree generation is computationally expensive, 
+but the resulting tree is considered superior to other rapid methods.
+Thus, we’ usually generate a small number of ML trees (16 in the following example).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$ </span>raxmlHPC <span class="nt">-T</span> 8 <span class="nt">-m</span> GTRGAMMA <span class="nt">-p</span> 144 -# 16 <span class="nt">-s</span> input.fasta <span class="nt">-n</span> treeML <span class="nt">-w</span> outdir
+
+<span class="gp">$ </span><span class="nb">ls</span> <span class="nt">-t</span> outdir/<span class="k">*</span>treeML<span class="k">*</span>
+</code></pre></div></div>
+
+<blockquote class="caution">
+  <p>Output directory specified by <code class="language-plaintext highlighter-rouge">-w</code> must be an absolute path in RAxML.
+<code class="language-plaintext highlighter-rouge">$(pwd)/outdir</code> may be used if <strong>outdir</strong> is a relative path.
+This directory needs to be created prior to running the command.
+Alternatively, you can use the current directory as output directory
+by not including this <code class="language-plaintext highlighter-rouge">-w</code> parameter.</p>
+</blockquote>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RAxML_parsimonyTree.treeML.RUN.0  RAxML_parsimonyTree.treeML.RUN.1
+RAxML_log.treeML.RUN.0            RAxML_parsimonyTree.treeML.RUN.2
+RAxML_log.treeML.RUN.1            RAxML_parsimonyTree.treeML.RUN.3
+...
+...
+RAxML_result.treeML.RUN.0         RAxML_result.treeML.RUN.1
+RAxML_result.treeML.RUN.2         RAxML_result.treeML.RUN.3
+...
+...
+RAxML_info.treeML                  RAxML_bestTree.treeML
+</code></pre></div></div>
+
+<p>RAxML will automatically select the best tree among the outputs 
+and store it in the file <strong>RAxML_bestTree.xxx</strong>.</p>
+
+<p>In the command above,</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-T</code> specifies number of CPU threads to be used.</li>
+  <li><code class="language-plaintext highlighter-rouge">-m</code> specified the substitution model.</li>
+  <li><code class="language-plaintext highlighter-rouge">-p</code> specifies random seed for starting parsimony tree.</li>
+  <li><code class="language-plaintext highlighter-rouge">-#</code> specifies the number of trees to generate using unique starting tree.</li>
+  <li><code class="language-plaintext highlighter-rouge">-s</code> specifies input file containing sequence alignment.</li>
+  <li><code class="language-plaintext highlighter-rouge">-n</code> specifies suffix for output files.</li>
+  <li><code class="language-plaintext highlighter-rouge">-w</code> specifies output directory.</li>
+</ul>
+
+<h3 id="generating-bootstraps">Generating bootstraps</h3>
+
+<p>Next, we can generate a large number of computationally permissive trees
+for calculating bootstrap values.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$ </span>raxmlHPC <span class="nt">-T</span> 8 <span class="nt">-m</span> GTRGAMMA <span class="nt">-p</span> 144 <span class="nt">-b</span> 144 -# 1000 <span class="nt">-s</span> input.fasta <span class="nt">-n</span> treeML <span class="nt">-w</span> outdir
+
+<span class="gp">$ </span><span class="nb">ls </span>outdir/<span class="k">*</span>treeBS<span class="k">*</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RAxML_info.treeBS    RAxML_bootstrap.treeBS
+</code></pre></div></div>
+
+<p>In the command above, <code class="language-plaintext highlighter-rouge">-b</code> specifies bootstrapping with supplied random seed, 
+and <code class="language-plaintext highlighter-rouge">-#</code> specifies the number of bootstraps.</p>
+
+<blockquote class="tips">
+  <p>A newer rapid bootstrap method
+<a href="https://doi.org/10.1080/10635150802429642" target="_blank">↗</a>
+can be employed in place of standard bootstraping
+<a href="https://doi.org/10.1111/j.1558-5646.1985.tb00420.x" target="_blank">↗</a>
+by using the argument <code class="language-plaintext highlighter-rouge">-x</code> instead of <code class="language-plaintext highlighter-rouge">-b</code>.</p>
+</blockquote>
+
+<p>RAxML can also perform posterior bootstrap convergence analysis to determine
+if the number of bootstraps is adequate.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$ </span>raxmlHPC <span class="nt">-m</span> GTRGAMMA <span class="nt">-p144</span> <span class="nt">-z</span> outdir/RAxML_bootstrap.treeBS <span class="nt">-I</span> autoMRE <span class="nt">-n</span> BStest <span class="nt">-w</span> outdir
+
+<span class="gp">$ </span><span class="nb">tail</span> <span class="nt">-n1</span> outdir/RAxML_info.BStest
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Converged after 900 replicates
+</code></pre></div></div>
+
+<p>In the command above, <code class="language-plaintext highlighter-rouge">-I</code> initiates convergence testing and 
+specifies which criterion to use for the test.
+<code class="language-plaintext highlighter-rouge">-z</code> specifies input bootstrap tree file to test.</p>
+
+<h3 id="applying-bootstrap-values-to-the-best-ml-tree">Applying bootstrap values to the best ML tree</h3>
+
+<p>The final step is to apply the bootstrap values to the best ML tree.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$ </span>raxmlHPC <span class="nt">-T</span> 8 <span class="nt">-m</span> GTRGAMMA <span class="nt">-p</span> 144 <span class="nt">-f</span> b <span class="nt">-t</span> outdir/RAxML_bestTree.treeML <span class="nt">-z</span> outdir/RAxML_bootstrap.treeBS <span class="nt">-n</span> treeBP <span class="nt">-w</span> outdir
+
+<span class="gp">$ </span><span class="nb">ls </span>outdir/<span class="k">*</span>treeBP<span class="k">*</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RAxML_bipartitionsBranchLabels.treeBP    RAxML_bipartitions.treeBP
+</code></pre></div></div>
+
+<p>In the command above, <code class="language-plaintext highlighter-rouge">-f b</code> instructs creation of bipartition tree from 
+best ML tree (supplied with <code class="language-plaintext highlighter-rouge">-t</code>) and 
+the bootstrap trees (specified with <code class="language-plaintext highlighter-rouge">-z</code>).</p>
+
+<p>The output files can be used to visualize the trees.
+The two output files have similar information except 
+the branch support information is supplied in a 
+slightly different format (node label vs branch label).
+Select the file that is correctly interpreted by your visualization 
+program.</p>
+
+<h3 id="a-single-step-approach">A single-step approach</h3>
+
+<p>RAxML can perform all three steps above with a single line of code.
+However, only the newer rapid approach can be used for bootstraping.
+By default, 20 ML trees are generated.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$ </span>raxmlHPC <span class="nt">-T</span> 8 <span class="nt">-m</span> GTRGAMMA <span class="nt">-p</span> 144 <span class="nt">-f</span> a <span class="nt">-x</span> 144 -# 1000 <span class="nt">-s</span> input.fasta <span class="nt">-n</span> treeALL <span class="nt">-w</span> outdir
+
+<span class="gp">$ </span><span class="nb">ls </span>outdir/<span class="k">*</span>treeALL<span class="k">*</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RAxML_bestTree.treeALL                    RAxML_bootstrap.treeALL
+RAxML_bipartitionsBranchLabels.treeALL    RAxML_info.treeALL
+RAxML_bipartitions.treeALL
+</code></pre></div></div>
+
+<blockquote class="notes">
+  <h2 id="raxml-resources">RAxML resources</h2>
+  <ul>
+    <li><a href="https://cme.h-its.org/exelixis/resource/download/NewManual.pdf" target="_blank">RAxML v8 manual</a></li>
+    <li><a href="https://cme.h-its.org/exelixis/web/software/raxml/hands_on.html" target="_blank">A more extensive RAxML guide by the authors</a></li>
+    <li><a href="https://github.com/stamatak/ExaML" target="_blank">ExaML - parallelized approach for whole genomes datasets</a></li>
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../50-multiple_gene_copies/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	      Copyright &copy; 2020–2022 <a href="https://github.com/BioInfoAPS">APS Basic Bioinformatics Workshop Team</a>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+
+<script>
+/* Based on https://stackoverflow.com/a/30894829/1802726 */
+var show_instructions = function() {
+     //set all nav tabs to inactive
+    $('.nav-tabs li').removeClass('active');
+
+    //get all nav tabs matching the os and set to active
+    $('.nav-tabs li a[href*="'+localStorage.os+'"]').closest('li').addClass('active');
+
+    //set all tabs to inactive
+    $('.tab-pane').removeClass('active');
+
+    //get all tabs matching the os and set to active
+    $('.tab-pane[id*="'+localStorage.os+'"]').addClass('active');
+}
+
+if (typeof(Storage) !== "undefined") {
+    if (localStorage.os == "undefined") {
+        localStorage.os = "windows";
+    }
+    show_instructions();
+} else {
+    console.log("No localStorage");
+}
+
+/* Based on https://stackoverflow.com/a/30894829/1802726 */
+$('.nav-tabs li a').click(function(){
+    //get selected os
+    localStorage.os = $(this)[0].dataset.os;
+    show_instructions();
+});
+
+  // detect misssing iframe for Eventbrite
+  $(document).ready(function(){
+      if ($('iframe').height() == 0) {
+          $('iframe').before('<p>Looks like your adblocker blocked the registration window. Please navigate to <a href="https://www.eventbrite.com/tickets-external?eid=&ref=etckt">https://www.eventbrite.com/tickets-external?eid=&ref=etckt</a> to register.</p>');
+      }
+  });
+
+  // hide alerts when site is rendered on carpentries.github.io
+  $(document).ready(function() {
+      if (location.href.startsWith("https://carpentries.github.io/workshop-template/")) {
+          $("div.alert").hide();
+      }
+  });
+
+</script>
+
+  </body>
+</html>
